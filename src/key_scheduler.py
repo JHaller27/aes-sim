@@ -95,8 +95,8 @@ class Transform(RoundStep):
 
 if __name__ == '__main__':
     ks = KeyScheduler(0)
-    for i in range(1 + 1):
+    for i in range(10 + 1):
         key = i2h(ks.get_round_key(), KEY_SIZE // 4)  # 4 bits/hex digit
-        chunk_size = 2
+        chunk_size = 8
         key_lst = [key[j:j + chunk_size] for j in range(0, len(key), chunk_size)]
         print('[{:02}] = {}'.format(i, ' '.join(key_lst)))
