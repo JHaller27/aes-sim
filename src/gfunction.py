@@ -61,12 +61,13 @@ class GFunction:
 
     __slots__ = ['_step', '_rc', 'data']
 
-    def __init__(self, key: int):
+    def __init__(self):
         self._step = None
         self._rc = RoundCoefficient()
-        self.data = key
+        self.data = None
 
-    def get_result(self) -> int:
+    def get_result(self, key: int) -> int:
+        self.data = key
         self._step = StartGFunction(self)
         while self._step is not None:
             self._step = self._step.run()
@@ -149,7 +150,7 @@ class Recombine(FunctionStep):
 
 
 if __name__ == '__main__':
-    g = GFunction(0)
+    g = GFunction()
     for i in range(10 + 1):
         key = i2h(g.get_result(), WORD_SIZE * 4 // 4)  # 4 words, 4 bits/hex digit
         chunk_size = 2
